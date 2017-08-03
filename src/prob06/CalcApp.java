@@ -42,14 +42,17 @@ public class CalcApp {
 			if(str.equals("quit"))
 				break;
 			String[] operatorArray = str.split(" ");
+			int firstOperand = Integer.parseInt(operatorArray[0]);
+			int secondOperand = Integer.parseInt(operatorArray[2]);
+			String operator = operatorArray[1];
 			
-			calcObj = CalcApp.operation(operatorArray[1]);
+			calcObj = CalcApp.operation(operator);
 			
 			if(calcObj == null){
 				continue;
 			}
 			else{
-				calcObj.setValue(Integer.parseInt(operatorArray[0]), Integer.parseInt(operatorArray[2]));
+				calcObj.setValue(firstOperand, secondOperand);
 			}
 			
 			System.out.println(">> "+calcObj.calculate());
