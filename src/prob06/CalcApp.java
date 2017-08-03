@@ -6,26 +6,27 @@ public class CalcApp {
 	
 	static Arithmetic calcObj = null;
 	
-	public static Arithmetic operation(String operator) {
+	public static Arithmetic operation(String[] formulaArray) {
+		
+		int firstOperand = Integer.parseInt(formulaArray[0]);
+		int secondOperand = Integer.parseInt(formulaArray[2]);
+		String operator = formulaArray[1];
 		
 		switch (operator) {
 		
-		case "+":
-			calcObj = new Add();
-			break;
-		case "-":
-			calcObj = new Sub();
-			break;
-		case "*":
-			calcObj = new Mul();
-			break;
-		case "/":
-			calcObj = new Div();
-			break;
-
-		default:
-			break;
+			case "+":
+				calcObj = new Add();	break;
+			case "-":
+				calcObj = new Sub();	break;
+			case "*":
+				calcObj = new Mul();	break;
+			case "/":
+				calcObj = new Div();	break;
+	
+			default:					break;
 		}
+		
+		calcObj.setValue(firstOperand, secondOperand);
 		
 		return calcObj;	
 	}
@@ -38,24 +39,20 @@ public class CalcApp {
 			
 			System.out.print(">> ");
 			
-			String str = scanner.nextLine();
-			if(str.equals("quit"))
+			String formula = scanner.nextLine();
+			if(formula.equals("quit")) {
 				break;
-			String[] operatorArray = str.split(" ");
-			int firstOperand = Integer.parseInt(operatorArray[0]);
-			int secondOperand = Integer.parseInt(operatorArray[2]);
-			String operator = operatorArray[1];
+			}
+			String[] formulaArray = formula.split(" ");
 			
-			calcObj = CalcApp.operation(operator);
+			calcObj = CalcApp.operation(formulaArray);
 			
 			if(calcObj == null){
 				continue;
 			}
 			else{
-				calcObj.setValue(firstOperand, secondOperand);
+				System.out.println(">> "+calcObj.calculate());
 			}
-			
-			System.out.println(">> "+calcObj.calculate());
 		}
 		
 		scanner.close();
