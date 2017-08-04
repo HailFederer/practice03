@@ -40,7 +40,7 @@ public class CalcApp {
 			System.out.print(">> ");
 			
 			String formula = scanner.nextLine();
-			if(formula.equals("quit")) {
+			if("quit".equals(formula)) {
 				break;
 			}
 			String[] formulaArray = formula.split(" ");
